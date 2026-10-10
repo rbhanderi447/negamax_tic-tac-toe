@@ -56,7 +56,7 @@ bool draw(int board[3][3]){
 }
 
 
-int negamax(int board[3][3], int player){
+int negamax(int board[3][3], int player, int alpha, int beta){
     if(checkWin(board, opponent(player))) return -1;
     if(checkWin(board, player)) return 1;
     if(draw(board)) return 0;
@@ -69,11 +69,18 @@ int negamax(int board[3][3], int player){
             if(board[i][j] == ' '){
                 if(player == 1){board[i][j] = 'X';}
                 else{board[i][j] = 'O';}
-                score = -negamax(board, opponent(player));
+                score = -negamax(board, opponent(player), -beta, -alpha);
                 if(score > bestScore){
                     bestScore = score;
                 }
+                if(bestScore > alpha){
+                    alpha = bestScore;
+                }
                 board[i][j] = ' ';
+                if(alpha >= beta){
+                    return bestScore;
+                }
+                
             }
         }
     }
@@ -92,7 +99,7 @@ int bestMove(int board[3][3], int player, int theMove[2]){
             if(board[i][j] == ' '){
                 if(player == 1){board[i][j] = 'X';}
                 else{board[i][j] = 'O';}
-                score = -negamax(board, opponent(player));
+                score = -negamax(board, opponent(player), -2, 2);
                 if(score > bestScore){
                     bestScore = score;
                     bMove[0] = i;
