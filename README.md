@@ -1,6 +1,6 @@
 # Tic-Tac-Toe in C
 
-A simple command-line Tic-Tac-Toe game in C featuring an unbeatable AI powered by the Negamax algorithm.
+A simple command-line Tic-Tac-Toe game in C featuring an unbeatable AI powered by the Negamax algorithm and Alpha-Beta Pruning.
 
 ## Features
 
